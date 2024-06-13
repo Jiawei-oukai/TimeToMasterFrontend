@@ -1,0 +1,86 @@
+
+  .goalCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    margin: 0px ; /* Center horizontally and add margin */
+    border-radius: 15px;
+    border: 1px dashed  #cbcbc3;
+    padding: 15px 30px;
+    max-width: 560px; /* Set maximum width */
+    min-width: 560px;
+    min-height: 180px;
+    max-height: 180px;
+  }
+  
+  @media (max-width: 1200px) {
+    .goalCard {
+      max-width: 100%; /* Full width on smaller screens */
+    }
+  }
+  
+
+ .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* 将宽度和高度设置为相同的值 */
+  height: 100px;
+  border-radius: 50%; /* 使元素成为圆形 */
+  background-color: #f6f7f2;
+  margin-right: 10px;
+  margin-left: 10px;
+  min-width: 100px; /* 与宽度相同 */
+}
+
+
+.goalDetails{
+  margin: 20px 15px;
+  max-width: 250px;
+  min-width: 250px;
+  .goalName {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 10px;
+    min-width: 100%;
+  }
+}
+
+
+.goalInfo {
+  display: flex;
+  flex-direction: column; // Adjust this spacing as needed
+}
+
+.goalInfoItem {
+  display: flex;
+  align-items: flex-start; 
+}
+
+.goalLabel {
+  margin-right: 10px; // Adjust this spacing as needed
+  flex-shrink: 0; 
+}
+
+
+  .completedTime{
+    display: flex;
+    min-width: 120px;
+    justify-content: center;
+    align-items: center;
+
+    .completedTimeText{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f6f7f2;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+

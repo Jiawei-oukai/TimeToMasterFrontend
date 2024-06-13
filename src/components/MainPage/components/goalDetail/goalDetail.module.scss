@@ -1,0 +1,231 @@
+/* The Modal (background) */
+.task-detail-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Modal Content/Box */
+.container {
+  position: relative;
+  background-color: #fefefe;
+  padding: 10px 30px;
+  width: 100%;
+  min-height: 680px;
+  border-radius: 10px;
+  
+  .top-div {
+    width: 100%;
+    min-height: 200px;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    margin: 0 auto; // Center horizontally on the page
+  
+    .left {
+      width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .right {
+      margin: 22px;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; // Move content to vertical center
+      align-items:flex-start; // Center content horizontally
+  
+      .textContainer {
+        text-align:left; // Center text horizontally
+        margin-bottom: 10px; // Reduce gap between text and button
+  
+        .title {
+          font-size: 16px;
+          font-weight: bolder;
+          color: #000000;
+        }
+  
+        .subtitle {
+          font-size: 14px;
+          color: #999999;
+        }
+      }
+  
+      .button {
+        margin-top: 10px;
+        background-color: #f2f5f0;
+        border: none;
+        display: flex;
+        justify-content: center; // Center content horizontally inside button
+        align-items: center; // Center content vertically inside button
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 200px;
+  
+        .square {
+          background-color: #b4c2a8;
+          width: 20px;
+          height: 20px;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center; // Center plus sign horizontally
+          align-items: center; // Center plus sign vertically
+          margin-right: 10px;
+  
+          .plus {
+            color: #ffffff;
+            font-size: 18px;
+          }
+        }
+  
+        .buttonText {
+          color: #333;
+          font-size: 14px;
+          font-weight: 600;
+          text-align: center; // Center text inside button
+        }
+      }
+    }
+  
+    .image {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 10%; // Adjust as needed
+}
+
+
+.time-day-record-div {
+  padding: 15px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px dashed #8a8a89; 
+  border-bottom: 1px dashed #8a8a89; 
+
+  .overallContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 0px 30px;
+
+    h3{
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    p{
+      font-size: 14px;
+      color:#a6a6a5;
+    }
+  }
+}
+
+.chart-div {
+  width: 100%;
+  height: 60%; // Adjusting the height to leave 5% space between TimeDayRecordDiv and ChartDiv
+  background-color: #f6f7f2;
+  border-radius: 20px; // Setting rounded corners
+  margin-top: 5%; // 5% space between TimeDayRecordDiv and ChartDiv
+
+
+}
+
+.edit-task-button {
+  width: 30%;
+  height: 85%;
+  background-color: #f6f7f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+
+  .image {
+    max-height: 70%;
+    max-width: 30%;
+    margin-right: 10px;
+  }
+
+  .text {
+    font-size: 16px;
+    color: #333;
+  }
+}
+
+
+.delete-task-button {
+  width: 30%;
+  height: 85%;
+  background-color: #f6f7f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+
+  .image {
+    max-height: 70%;
+    max-width: 30%;
+    margin-right: 10px;
+  }
+
+  .text {
+    font-size: 16px;
+    color: #333;
+  }
+}
+
+/* Input fields */
+.container input[type="text"],
+.container input[type="datetime-local"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+/* Submit Button */
+.containerbutton {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container button:hover {
+    background-color: #45a049;
+}
+
+.error{
+    color: red;
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

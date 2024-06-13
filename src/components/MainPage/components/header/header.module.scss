@@ -1,0 +1,90 @@
+.headerContent {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: center;
+    height: 60px;
+    color: #5f646d;
+    background-color: white;
+    font-size: 13px;
+    font-weight: 500;
+    -webkit-box-align: center;
+
+    border-bottom: 1px solid rgb(239, 241, 244);
+    padding: 0px 15px;
+
+    div {
+        padding: 5px 8px;
+    }
+}
+
+.logo {
+    flex: 20%;
+}
+
+.navbar {
+    flex: 60%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+
+    .tab {
+        margin: 0px 5px;
+        width: auto;
+        text-decoration: none;
+        background-color: white;
+        border-radius: 4px;
+        position: relative;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+
+        .normalLink {
+            border-radius: 4px;
+            padding: 5px 15px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .selectedLink {
+            color: #373a40;
+            background-color: #dddeda;
+            border-radius: 4px;
+            padding: 5px 15px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.setting {
+    flex: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 40px;
+    align-items: center;
+}
+
+.logoutButton {
+    background-color: white;
+    border: none;
+    color: #5f646d;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 5px 15px;
+    margin: 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoutButton:hover {
+    background-color: #dddeda;
+}

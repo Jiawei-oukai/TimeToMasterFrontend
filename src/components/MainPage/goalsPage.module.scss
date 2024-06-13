@@ -1,0 +1,102 @@
+.pageContainer {
+  height: 100vh;
+  background-color: #f6f7f2;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: space-between; /* Ensure footer is at the bottom */
+  height: 100vh;
+
+  .selectorContainer {
+    width: 1200px;
+    min-width: 1200px;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .addButton {
+      width: 50px;
+      height: 50px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .innerCircle {
+      width: 36px;
+      height: 36px;
+      background-color: #a7b798;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .plusSign {
+      font-size: 30px;
+      color: white;
+      font-weight: bold;
+      line-height: 35px;
+      text-align: center;
+      width: 100%; 
+      position: relative; 
+      top: -2px; 
+      left: 0px; 
+    }
+  }
+
+  .goalList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align items to start */
+    gap: 10px;
+    max-width: 1150px;
+    margin: 0 auto;
+    max-height: calc(100vh - 200px); /* Adjust this value to fit your layout */
+    overflow-y: auto;
+  }
+
+  .goalList::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .goalList::-webkit-scrollbar-track {
+    background: #f6f7f2;
+  }
+
+  .goalList::-webkit-scrollbar-thumb {
+    background-color: #a7b798;
+    border-radius: 10px;
+    border: 3px solid #f6f7f2;
+  }
+
+  .goalList::-webkit-scrollbar-thumb:hover {
+    background-color: #8f9d7b;
+  }
+}
+
+.footer {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #f6f7f2;
+}
+
+.footContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
+.goalCard {
+  width: 48%; /* Adjust the width to fit two cards per row */
+}

@@ -1,0 +1,126 @@
+.customChart {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.chartContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chartHeader {
+  max-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.chartTitle h2 {
+  display: inline;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.chartTitle p {
+  display: inline;
+  font-size: 16px;
+  color: #999;
+}
+
+.chartContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pieChartContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.details h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.tableContainer {
+  max-height: 200px; /* 设置表格容器的最大高度 */
+  overflow-y: auto; /* 添加垂直滚动条 */
+  border: 1px dashed #cbcbc3;
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 10px;
+}
+
+.tableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: center;
+}
+
+.tableContainer thead th {
+  background-color: #a7b798; /* 修改为滚动条的颜色 */
+  color: white; /* 表头文字颜色 */
+  padding: 10px;
+  font-weight: bold;
+}
+
+.tableContainer tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.tableContainer tbody td {
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.tableContainer tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.tableContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tableContainer::-webkit-scrollbar-track {
+  background: #f6f7f2;
+}
+
+.tableContainer::-webkit-scrollbar-thumb {
+  background-color: #a7b798;
+  border-radius: 10px;
+  border: 2px solid #f6f7f2;
+}
+
+.tableContainer::-webkit-scrollbar-thumb:hover {
+  background-color: #8f9d7b;
+}
+
+.RechartsPieChart {
+  max-height: 400px; /* 根据需要调整高度 */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

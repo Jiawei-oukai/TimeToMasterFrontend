@@ -1,0 +1,42 @@
+.clock-bar {
+    width: 1000px;
+    height: 60px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+  
+    .left, .right {
+      width: 20%;
+      display: flex;
+      align-items: center;
+    }
+  
+    .middle {
+      width: 60%;
+    }
+  
+    .image {
+      height: 40px;
+      margin-right: 10px;
+    }
+  
+    .text {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  
+    .right {
+      justify-content: flex-end; // Align the timer to the right
+      padding-right: 10px; // Add some padding to create a small gap from the right edge
+    }
+  
+    .timer {
+      background-color: #f6f7f2;
+      padding: 10px 20px; // Increase horizontal padding to make the timer box wider
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 5px;
+    }
+  }
+  
