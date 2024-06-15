@@ -79,7 +79,7 @@ export default function Histogram(props: HistogramProps) {
                         <XAxis dataKey="recordsDate" stroke="#494949" axisLine={false} tickLine={false}
                             tick={{ fontSize: 16 }}
                             tickFormatter={(value) => {
-                                // 直接返回日期字符串，确保不受时区影响
+                                // Return the date string directly, ensuring it is not affected by time zones.
                                 return value;
                             }}
                         >

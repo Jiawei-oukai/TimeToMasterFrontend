@@ -9,7 +9,7 @@ interface Props {
     goal: Goal | null;
 }
 
-export default function GoalCard(props: Props) { // 修改为以大写字母开头
+export default function GoalCard(props: Props) {
 
     const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
     const [title, setTitle] = useState("");

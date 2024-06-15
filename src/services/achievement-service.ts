@@ -49,8 +49,8 @@ export const updateAchievement = async (id: string, achievementDisplay: Achievem
     },
     body: JSON.stringify({
       ...achievementDisplay,
-      achieved: achievementDisplay.achieved, // 确保包含 achieved 属性
-      achievementDate: achievementDisplay.achievementDate, // 确保包含 achievementDate 属性
+      achieved: achievementDisplay.achieved, 
+      achievementDate: achievementDisplay.achievementDate, 
       goalId: achievementDisplay.goalId,
     }),
   });
