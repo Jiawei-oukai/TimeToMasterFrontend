@@ -11,7 +11,7 @@ import { getAllGoalByEmail } from '../../services/goal-service';
 import Goal from '@/models/goal';
 
 export default function StatisticsPage() {
-  const { user } = useAuth(); // 获取用户信息
+  const { user } = useAuth(); // Get user information
   const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
   const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
   const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
@@ -20,8 +20,7 @@ export default function StatisticsPage() {
   const [totalInvestedTime, setTotalInvestedTime] = useState<string>('');
   const [streak, setStreak] = useState<number>(0);
 
-
-  // 定义 fetchAllRecordsByEmail 函数，并传递 user.email
+  // Define fetchAllRecordsByEmail function and pass user.email
   const fetchAllRecordsByEmail = useCallback(() => {
     if (user && user.email) {
       getDailyByEmail(user.email).then((items) => {
@@ -39,7 +38,7 @@ export default function StatisticsPage() {
     }
   }, [user]);
 
-  // 获取用户的所有 goals 并生成 pieData
+  // Fetch all goals for the user and generate pieData
   const fetchGraphData = useCallback(() => {
     if (user && user.email) {
       getAllGoalByEmail(user.email).then((goals) => {
@@ -61,31 +60,32 @@ export default function StatisticsPage() {
     }
   }, [user]);
 
+  // Fetch user's record streak
   const fetchStreak = useCallback(() => {
     if (user && user.email) {
       getAllRecordByEmail(user.email).then((records: any[]) => {
         const today = moment().startOf('day');
         let currentStreak = 0;
   
-        // 将记录的日期部分提取出来
+        // Extract the date part of the records
         const dates = records.map(record => record.recordsDate.split('T')[0]);
   
-        // 打印 records 和 dates
+        // Print records and dates
         // console.log("Records:", records);
         // console.log("Dates:", dates);
   
-        const uniqueDates = Array.from(new Set(dates)).sort((a, b) => moment(a).diff(moment(b))); // 去重并排序
+        const uniqueDates = Array.from(new Set(dates)).sort((a, b) => moment(a).diff(moment(b))); // Remove duplicates and sort
   
-        // 打印 uniqueDates
+        // Print uniqueDates
         // console.log("Unique Dates:", uniqueDates);
   
-        // 确定从哪天开始检查
+        // Determine the start date for checking
         let startDate = today;
         if (!uniqueDates.includes(today.format('YYYY-MM-DD'))) {
           startDate = today.clone().subtract(1, 'days');
         }
   
-        // 检查每一天是否有记录，从 startDate 开始往前
+        // Check each day for records, starting from startDate and going backward
         for (let i = 0; ; i++) {
           const dateToCheck = startDate.clone().subtract(i, 'days').format('YYYY-MM-DD');
           console.log("Date to check:", dateToCheck);
@@ -95,13 +95,13 @@ export default function StatisticsPage() {
             break;
           }
         }
-  
         setStreak(currentStreak);
         console.log("Current Streak:", currentStreak);
       });
     }
   }, [user]);
-  // 使用 useEffect 调用 fetchAllRecordsByEmail 和 fetchGraphData
+
+  // Use useEffect to call fetchAllRecordsByEmail, fetchGraphData, and fetchStreak
   useEffect(() => {
     fetchAllRecordsByEmail();
     fetchGraphData();

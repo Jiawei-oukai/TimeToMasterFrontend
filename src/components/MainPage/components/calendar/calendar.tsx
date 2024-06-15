@@ -1,22 +1,25 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Import the styles
+import 'react-datepicker/dist/react-datepicker.css'; // Import the styles for the DatePicker
 import styles from './calendar.module.scss'; // Import corresponding SCSS file
-import { getByDate } from '../../../../services/record-service'
+import { getByDate } from '../../../../services/record-service';
 import Record from '@/models/record';
 import { useAuth } from '@/app/AuthContext';
 
 const Calendar: React.FC = () => {
+  // State to store the selected date
   const [selectedDate, setSelectedDate] = useState(new Date());
+  // State to store the records fetched from the server
   const [records, setRecords] = useState<Record[]>([]);
-  const { user } = useAuth();
+  const { user } = useAuth(); // Get the current user from AuthContext
 
+  // Function to fetch records for the selected date
   const fetchRecords = useCallback(async (date: Date) => {
     if (user) {
       try {
         console.log("Selected date:" + date.toISOString().split('T')[0]);
         const items = await getByDate(date.toISOString().split('T')[0], user.email);
-        // console.log("Calendar Records:", items);
+        // Update the state with the fetched records
         setRecords(items);
       } catch (error) {
         console.error("Error fetching records:", error);
@@ -24,18 +27,22 @@ const Calendar: React.FC = () => {
     }
   }, [user]);
 
+  // useEffect to fetch records whenever the selected date changes
   useEffect(() => {
     fetchRecords(selectedDate);
   }, [selectedDate, fetchRecords]);
 
+  // Handler for date change
   const handleDateChange = (date: Date) => {
     setSelectedDate(date);
   };
 
+  // Memoized computation of total hours from the records
   const totalHours = useMemo(() => {
     return records.reduce((sum, record) => sum + record.Time, 0);
   }, [records]);
 
+  // Memoized formatting of total time into hours and minutes
   const formattedTotalTime = useMemo(() => {
     const wholeHours = Math.floor(totalHours);
     const totalMinutes = Math.round((totalHours - wholeHours) * 60);
@@ -49,6 +56,7 @@ const Calendar: React.FC = () => {
     return formattedTime;
   }, [totalHours]);
 
+  // Formatting the selected date into a readable format
   const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
 
   return (
@@ -63,15 +71,16 @@ const Calendar: React.FC = () => {
           <DatePicker
             selected={selectedDate}
             onChange={handleDateChange}
-            inline={true}
+            inline={true} // Display the calendar inline
           />
         </div>
         <div className={styles['bottom-div']}>
           <div className={styles['bottom-top-bar']}>
-            {formattedDate}  {formattedTotalTime}
+            {formattedDate} {formattedTotalTime}
           </div>
           <div className={styles['records-container']}>
             {records.map((record, index) => {
+              // Formatting each record's time into hours and minutes
               const hours = Math.floor(record.Time);
               const minutes = Math.round((record.Time - hours) * 60);
               let formattedTime = '';

@@ -4,7 +4,7 @@ import { UserLoginInfo } from '@/models/users';
 
 interface User {
   email: string;
-  // 其他用户信息字段
+  // other info
 }
 
 interface AuthContextProps {

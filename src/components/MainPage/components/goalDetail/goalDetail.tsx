@@ -9,9 +9,9 @@ import { getAllRecordByEmail } from '@/services/record-service';
 import moment from 'moment';
 
 interface Props {
-  isOpen: boolean;
+  // isOpen: boolean;
   goal: Goal | null;
-  onClose: () => void;
+  // onClose: () => void;
   addRecord: (goal: Goal) => void;
   dailyRecords: DailyRecord[];
   weeklyRecords: DailyRecord[];
@@ -61,9 +61,9 @@ export default function GoalDetail(props: Props) {
         const totalHours = goalRecords.reduce((total, record) => total + record.Time, 0);
         const formattedTime = Number.isInteger(totalHours) ? `${totalHours}h` : `${totalHours.toFixed(2)}h`;
         setTotalInvestedTime(formattedTime);
-
+        // console.log(goalRecords);
         setRecordCount(goalRecords.length);
-
+        // console.log("Record Count:" + recordCount);
         const today = moment().startOf('day');
         let currentStreak = 0;
 

@@ -31,10 +31,41 @@ export default function MainPage() {
     <GoalCardMain
       key={goal._id}
       goal={goal}
-      onEdit={() => handleEdit(goal)}
+      onEdit={() => handleGoalSelect(goal)}
     ></GoalCardMain>);
 
-  const fetchAllGoals = useCallback(() => {
+  // const fetchAllGoals = useCallback(() => {
+  //   if (user) {
+  //     getAllGoalByEmail(user.email).then((items) => {
+  //       setGoals(items);
+  //       if (items.length > 0 && currentGoal === undefined) {
+  //         setCurrentGoal(items[0]);
+  //       }
+  //     });
+  //   }
+  // }, [user, currentGoal]);
+
+  // Fetch All records
+  // const fetchAllRecordsByGid = useCallback(() => {
+  //   if (!currentGoal) return;
+  
+  //   getDailyByGid(currentGoal._id).then((items) => {
+  //     setDaylyRecords(items);
+  //   });
+  //   getWeeklyByGid(currentGoal._id).then((items) => {
+  //     setWeeklyRecords(items);
+  //   });
+  //   getMonthlyByGid(currentGoal._id).then((items) => {
+  //     setMonthlyRecords(items);
+  //   });
+  // }, [currentGoal]);
+
+  // useEffect(() => {
+  //   fetchAllGoals();
+  //   fetchAllRecordsByGid();
+  // }, [fetchAllGoals, fetchAllRecordsByGid, goalDetailOpen]);
+
+  const fetchAllGoals = () => {
     if (user) {
       getAllGoalByEmail(user.email).then((items) => {
         setGoals(items);
@@ -43,12 +74,28 @@ export default function MainPage() {
         }
       });
     }
-  }, [user, currentGoal]);
+  };
 
-  // Display modal to edit goal
-  const handleEdit = (goal: Goal) => {
+
+  const fetchAllRecordsByGid = () => {
+    if (!currentGoal) return;
+  
+    getDailyByGid(currentGoal._id).then((items) => {
+      setDaylyRecords(items);
+    });
+    getWeeklyByGid(currentGoal._id).then((items) => {
+      setWeeklyRecords(items);
+    });
+    getMonthlyByGid(currentGoal._id).then((items) => {
+      setMonthlyRecords(items);
+    });
+  };
+  
+
+  //display the detail analysis for a goal
+  const handleGoalSelect = (goal: Goal) => {
     setCurrentGoal(goal);
-    setGoalDetailOpen(true);
+    // setGoalDetailOpen(true);
   };
 
   // Display modal to add record
@@ -65,25 +112,14 @@ export default function MainPage() {
     fetchAllRecordsByGid();
   };
 
-  // Fetch All records
-  const fetchAllRecordsByGid = useCallback(() => {
-    if (!currentGoal) return;
   
-    getDailyByGid(currentGoal._id).then((items) => {
-      setDaylyRecords(items);
-    });
-    getWeeklyByGid(currentGoal._id).then((items) => {
-      setWeeklyRecords(items);
-    });
-    getMonthlyByGid(currentGoal._id).then((items) => {
-      setMonthlyRecords(items);
-    });
-  }, [currentGoal]);
-
   useEffect(() => {
     fetchAllGoals();
+  }, []);
+
+  useEffect(() => {
     fetchAllRecordsByGid();
-  }, [fetchAllGoals, fetchAllRecordsByGid, goalDetailOpen]);
+  }, [currentGoal]);
   
 
   return (
@@ -101,13 +137,14 @@ export default function MainPage() {
             </div>
           </div>
           <div className={styles.goalDetail}>
-            <GoalDetail isOpen={goalDetailOpen}
+            <GoalDetail 
+              // isOpen={goalDetailOpen}
               goal={currentGoal || null}
-              onClose={() => setGoalDetailOpen(false)}
+              // onClose={() => setGoalDetailOpen(false)}
               addRecord = {handleEditRecord}
               dailyRecords = {daylyRecords}
-            weeklyRecords = {weeklyRecords}
-            monthlyRecords= {monthlyRecords}
+              weeklyRecords = {weeklyRecords}
+              monthlyRecords= {monthlyRecords}
             />
           </div>
           <div className={styles.calendarContainer}>
