@@ -1,6 +1,6 @@
 import styles from './header.module.scss';
 import React from 'react';
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { useAuth } from '@/app/AuthContext';
 
 interface HeaderProps {
@@ -22,18 +22,18 @@ export default function Header({ selectedTab }: HeaderProps) {
 
                 <div className={styles.navbar}>
                     <div className={styles.tab}>
-                        <Link className={selectedTab === 'Today' ? styles.selectedLink : styles.normalLink} to="/home">
-                            Today
+                        <Link href="/home" className={selectedTab === 'Today' ? styles.selectedLink : styles.normalLink}>
+                        Today
                         </Link>
                     </div>
                     <div className={styles.tab}>
-                        <Link className={selectedTab === 'Goals' ? styles.selectedLink : styles.normalLink} to="/goals">
-                            Goals
+                        <Link href="/goals" className={selectedTab === 'Goals' ? styles.selectedLink : styles.normalLink}>
+                        Goals
                         </Link>
                     </div>
                     <div className={styles.tab}>
-                        <Link className={selectedTab === 'Statistics' ? styles.selectedLink : styles.normalLink} to="/statistics">
-                            Statistics
+                        <Link href="/statistics" className={selectedTab === 'Statistics' ? styles.selectedLink : styles.normalLink}>
+                        Statistics
                         </Link>
                     </div>
                 </div>

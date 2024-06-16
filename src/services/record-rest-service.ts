@@ -1,7 +1,7 @@
 import Record  from '../models/record';
 import RecordCreate from '@/models/record-create';
 
-const baseURI = 'http://timetomaster-backend-dev.us-east-1.elasticbeanstalk.com';
+const baseURI = process.env.BE_BASE_URI;
 
 export const create = async (record: RecordCreate) => {
     const url = '/records';

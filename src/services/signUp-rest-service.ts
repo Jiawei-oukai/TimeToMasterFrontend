@@ -1,7 +1,7 @@
 import { UserSignUpInfo } from '@/models/users';
 import Users from '@/models/users';
 
-const baseURI = 'http://timetomaster-backend-dev.us-east-1.elasticbeanstalk.com';
+const baseURI = process.env.BE_BASE_URI;
 
 export const emailExist = async (email: string): Promise<boolean> => {
   const url = `${baseURI}/users/${email}`;

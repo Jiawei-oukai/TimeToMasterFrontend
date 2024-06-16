@@ -1,16 +1,18 @@
-import styles from './statisticsPage.module.scss';
+"use client";
+import styles from './page.module.scss';
 import React, { useState, useEffect, useCallback } from 'react';
 import moment from 'moment';
-import { getDailyByEmail, getWeeklyByEmail, getMonthlyByEmail, getAllRecordByEmail } from '../../services/record-service';
+import { getDailyByEmail, getWeeklyByEmail, getMonthlyByEmail, getAllRecordByEmail } from '@/services/record-service';
 import { useAuth } from '@/app/AuthContext';
-import Header from './components/header/header';
-import Histogram from './components/histoGram/histogram';
-import PieChart from './components/pieChart/pieChart';
+import Header from '@/components/header/header';
+import Histogram from '@/components/histoGram/histogram';
+import PieChart from '@/components/pieChart/pieChart';
 import DailyRecord from '@/models/record-daily';
-import { getAllGoalByEmail } from '../../services/goal-service';
+import { getAllGoalByEmail } from '@/services/goal-service';
 import Goal from '@/models/goal';
 
 export default function StatisticsPage() {
+  console.log("StatisticsPage",StatisticsPage);
   const { user } = useAuth(); // Get user information
   const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
   const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);

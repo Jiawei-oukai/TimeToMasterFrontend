@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // Import the styles for the DatePicker
 import styles from './calendar.module.scss'; // Import corresponding SCSS file
-import { getByDate } from '../../../../services/record-service';
+import { getByDate } from '@/services/record-service';
 import Record from '@/models/record';
 import { useAuth } from '@/app/AuthContext';
 

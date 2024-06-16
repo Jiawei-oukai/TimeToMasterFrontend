@@ -1,30 +1,29 @@
-"use client";
-import { Routes, Route } from "react-router-dom";
-import dynamic from 'next/dynamic';
-import 'react-toastify/dist/ReactToastify.css';
-import React from "react";
-import PrivateRoute from "./PrivateRoute";
-import { AuthProvider } from "./AuthContext";
-import GoalPage from "../components/MainPage/mainPage"
-import StatisticsPage from "../components/MainPage/statisticsPage"
-import GoalsPage from "../components/MainPage/goalsPage"
-import LoginPage from "../components/LoginPage/login"
 
-const BrowserRouter = dynamic(() => import('react-router-dom').then(mod => mod.BrowserRouter), { ssr: false });
-export default function Home() {
+
+// src/app/page.tsx
+"use client";
+import React from 'react';
+// import { useRouter } from 'next/navigation';
+// import { useEffect } from 'react';
+// import { useAuth } from './AuthContext';
+
+const HomePage = () => {
+  // const router = useRouter();
+  // const { isAuthenticated } = useAuth();
+
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     router.push('/login');
+  //   }
+  // }, [isAuthenticated, router]);
+
   return (
-    <AuthProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route element={<PrivateRoute/>} >
-          <Route path="/home" element={<GoalPage />} />
-          <Route path="/statistics" element={<StatisticsPage />} />
-          <Route path="/goals" element={<GoalsPage />} />         
-        </Route>
-      </Routes>
-    </BrowserRouter>
-    </AuthProvider>
-  );
-}
+    <>
+    <div>Welcome to the Home Page</div>
+    <a href='/login'>login</a>
+    </>
+  
+);
+};
+
+export default HomePage;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import styles from './signUpForm.module.scss';
 import { signUp } from '@/services/signUp-service';
-import { useNavigate } from 'react-router-dom';
 import GoalCreate from '@/models/goal-create';
 import { createGoal } from '@/services/goal-service';
 
@@ -21,7 +20,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose, setLoginEmail }) => {
   const [isEmailTouched, setIsEmailTouched] = useState<boolean>(false);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [signUpFailed, setSignUpFailed] = useState<string>('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     setIsPasswordMatch(password === confirmPassword);

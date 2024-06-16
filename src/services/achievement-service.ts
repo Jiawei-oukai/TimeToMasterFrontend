@@ -8,7 +8,7 @@ export const getAllAchievement = async () => {
     return achievements;
 }
 
-const baseURI = 'http://timetomaster-backend-dev.us-east-1.elasticbeanstalk.com';
+const baseURI = process.env.BE_BASE_URI;
 
 export const searchAchievement = async <T> (url: string, query: any = {} ): Promise<T[]> => {
     const params: URLSearchParams = new URLSearchParams(query);

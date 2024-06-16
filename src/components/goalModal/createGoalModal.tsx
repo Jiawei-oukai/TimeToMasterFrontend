@@ -20,7 +20,7 @@ import Image from 'next/image';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { createGoal } from '../../../../services/goal-service';
+import { createGoal } from '@/services/goal-service';
 
 interface Props {
   isOpen: boolean;
