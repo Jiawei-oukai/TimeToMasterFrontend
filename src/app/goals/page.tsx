@@ -39,7 +39,7 @@ export default function GoalsPage() {
     setEditModalOpen(false);
   };
 
-  
+  // test comment
 
   const goalCards = goals.map((goal) =>
     <GoalCard
