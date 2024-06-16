@@ -1,6 +1,6 @@
 import { UserLoginInfo }  from '@/models/users';
 
-const baseURI = 'http://timetomaster-backend-dev.us-east-1.elasticbeanstalk.com';
+const baseURI = process.env.BE_BASE_URI;
 
 export const validate = async (userInfo: UserLoginInfo) => {
     // console.log("validate users:", userInfo)

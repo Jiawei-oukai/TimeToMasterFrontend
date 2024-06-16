@@ -18,7 +18,7 @@ import goalIcon10 from './goalIcons/10.png';
 import goalIcon11 from './goalIcons/11.png';
 import goalIcon12 from './goalIcons/12.png';
 
-import { updateGoal, deleteGoal } from '../../../../services/goal-service';
+import { updateGoal, deleteGoal } from '@/services/goal-service';
 import Image from 'next/image';
 
 interface Props {

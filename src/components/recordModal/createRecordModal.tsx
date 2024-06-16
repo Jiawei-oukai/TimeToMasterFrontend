@@ -9,7 +9,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { useAuth } from '@/app/AuthContext';
 
-import { createRecord } from '../../../../services/record-service';
+import { createRecord } from '@/services/record-service';
 
 interface Props {
   goal: Goal | null;

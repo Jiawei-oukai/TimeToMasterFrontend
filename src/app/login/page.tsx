@@ -1,10 +1,11 @@
+"use client";
 import React, { useState, useEffect } from 'react';
-import styles from './login.module.scss';
-import SignUpForm from './components/signUpForm'; // Import SignUpForm component
+import styles from './page.module.scss';
+import SignUpForm from '@/components/SignUp/signUpForm'; // Import SignUpForm component
 import { useAuth } from '@/app/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
-const LoginPage: React.FC = () => {
+export default function LoginPage () {
   const [email, setEmail] = useState<string>('visitor@example.com');
   const [password, setPassword] = useState<string>('example');
   const [showSignUp, setShowSignUp] = useState<boolean>(false);
@@ -12,7 +13,7 @@ const LoginPage: React.FC = () => {
   const [isEmailTouched, setIsEmailTouched] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const { Authlogin: authlogin } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     // Check email format
@@ -28,11 +29,9 @@ const LoginPage: React.FC = () => {
         if (validatedUser == null) {
           setError("Email or password mismatch");
         } else {
-          console.log('Login successful');
-          navigate('/home');
+          router.push('/home');
         }
       } catch (error) {
-        console.error('Email or password mismatch:', error);
         setPassword('');
         setError('Email or password mismatch');
       }
@@ -40,7 +39,6 @@ const LoginPage: React.FC = () => {
   };
 
   const handleRegister = () => {
-    // Show sign-up form
     setShowSignUp(true);
     setEmail('');
     setIsEmailTouched(false);
@@ -49,9 +47,9 @@ const LoginPage: React.FC = () => {
   };
 
   const handleCloseSignUp = () => {
-    // Close sign-up form
     setShowSignUp(false);
   };
+
 
   return (
     <div className={styles.pageContainer}>
@@ -113,5 +111,3 @@ const LoginPage: React.FC = () => {
     </div>
   );
 };
-
-export default LoginPage;

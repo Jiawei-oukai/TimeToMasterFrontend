@@ -1,19 +1,20 @@
-import styles from './mainPage.module.scss';
+"use client";
+import styles from './page.module.scss';
 import React, { useState, useEffect, useCallback } from 'react';
-import { getAllGoalByEmail } from '../../services/goal-service';
-import { getDailyByGid, getWeeklyByGid, getMonthlyByGid } from '../../services/record-service';
+import { getAllGoalByEmail } from '@/services/goal-service';
+import { getDailyByGid, getWeeklyByGid, getMonthlyByGid } from '@/services/record-service';
 import { useAuth } from '@/app/AuthContext';
-import Header from './components/header/header';
-import GoalCardMain from './components/goalCard/goalCard2';
-import Calendar from './components/calendar/calendar';
-import GoalDetail from './components/goalDetail/goalDetail';
-import CreateRecordGoalModal from './components/recordModal/createRecordModal';
+import Header from '@/components/header/header';
+import GoalCardMain from '@/components/goalCard/goalCard2';
+import Calendar from '@/components/calendar/calendar';
+import GoalDetail from '@/components/goalDetail/goalDetail';
+import CreateRecordGoalModal from '@/components/recordModal/createRecordModal';
 
 import Goal from '@/models/goal';
 import Record from '@/models/record';
 import DailyRecord from '@/models/record-daily';
 
-export default function MainPage() {
+export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState('Today');
   const { user } = useAuth();
   const [goals, setGoals] = useState<Goal[]>([]);
@@ -33,37 +34,6 @@ export default function MainPage() {
       goal={goal}
       onEdit={() => handleGoalSelect(goal)}
     ></GoalCardMain>);
-
-  // const fetchAllGoals = useCallback(() => {
-  //   if (user) {
-  //     getAllGoalByEmail(user.email).then((items) => {
-  //       setGoals(items);
-  //       if (items.length > 0 && currentGoal === undefined) {
-  //         setCurrentGoal(items[0]);
-  //       }
-  //     });
-  //   }
-  // }, [user, currentGoal]);
-
-  // Fetch All records
-  // const fetchAllRecordsByGid = useCallback(() => {
-  //   if (!currentGoal) return;
-  
-  //   getDailyByGid(currentGoal._id).then((items) => {
-  //     setDaylyRecords(items);
-  //   });
-  //   getWeeklyByGid(currentGoal._id).then((items) => {
-  //     setWeeklyRecords(items);
-  //   });
-  //   getMonthlyByGid(currentGoal._id).then((items) => {
-  //     setMonthlyRecords(items);
-  //   });
-  // }, [currentGoal]);
-
-  // useEffect(() => {
-  //   fetchAllGoals();
-  //   fetchAllRecordsByGid();
-  // }, [fetchAllGoals, fetchAllRecordsByGid, goalDetailOpen]);
 
   const fetchAllGoals = () => {
     if (user) {

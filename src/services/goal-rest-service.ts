@@ -1,7 +1,7 @@
 import Goal  from '../models/goal';
 import PartialGoal from "../models/goal-update";
 
-const baseURI = 'http://timetomaster-backend-dev.us-east-1.elasticbeanstalk.com';
+const baseURI = process.env.BE_BASE_URI;
 
 export const getAllByEmail = async (email: string): Promise<Goal[]> => {
     const url = `/goals/userEmail/${email}`;
