@@ -43,7 +43,6 @@ export const restSignUp = async (userInfo: UserSignUpInfo): Promise<Users | null
   }
 
   const user = await response.json();
-  console.log('User created successfully');
 
   return user as Users;
 };

@@ -61,9 +61,7 @@ export default function GoalDetail(props: Props) {
         const totalHours = goalRecords.reduce((total, record) => total + record.Time, 0);
         const formattedTime = Number.isInteger(totalHours) ? `${totalHours}h` : `${totalHours.toFixed(2)}h`;
         setTotalInvestedTime(formattedTime);
-        // console.log(goalRecords);
         setRecordCount(goalRecords.length);
-        // console.log("Record Count:" + recordCount);
         const today = moment().startOf('day');
         let currentStreak = 0;
 

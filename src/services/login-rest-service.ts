@@ -3,7 +3,6 @@ import { UserLoginInfo }  from '@/models/users';
 const baseURI = process.env.BE_BASE_URI;
 
 export const validate = async (userInfo: UserLoginInfo) => {
-    // console.log("validate users:", userInfo)
     const url = '/users/validate';
     const response = await fetch(baseURI + url, {
         method: 'POST',
@@ -19,7 +18,6 @@ export const validate = async (userInfo: UserLoginInfo) => {
 
     const user =  await response.json();
     // localStorage.setItem('token', token);
-    // console.log('Login successful', user);
   
     return user;
 }

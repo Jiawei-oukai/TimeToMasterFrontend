@@ -15,7 +15,6 @@ export default function Histogram(props: HistogramProps) {
 
     const handlePeriodChange = (newPeriod: string) => {
         setSelectedPeriod(newPeriod);
-        // console.log("Daily Records:", props.dailyRecords);
     };
 
     const getDataForPeriod = () => {
@@ -34,10 +33,6 @@ export default function Histogram(props: HistogramProps) {
                 records = [];
                 break;
         }
-
-        records.forEach(record => {
-            // console.log(`Record Date: ${record.recordsDate}`);
-        });
 
         return records.sort((a, b) => {
             const dateA = new Date(a.recordsDate).getTime();
