@@ -5,12 +5,12 @@ import { useAuth } from '@/app/AuthContext';
 import styles from './styles.module.scss';
 import SignUpForm from '@/components/SignUpForm';
 
-interface SignUpFormProps {
+interface SignInFormProps {
   defaultEmail: string;
   defaultPassword: string;
 }
 
-const SignInForm: React.FC<SignUpFormProps> = ({ defaultEmail, defaultPassword }) => {
+const SignInForm: React.FC<SignInFormProps> = ({ defaultEmail, defaultPassword }) => {
   const [email, setEmail] = useState<string>(defaultEmail);
   const [password, setPassword] = useState<string>(defaultPassword);
   const [showSignUp, setShowSignUp] = useState<boolean>(false);
