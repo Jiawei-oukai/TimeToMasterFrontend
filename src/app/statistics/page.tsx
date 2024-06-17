@@ -1,14 +1,19 @@
 "use client";
-import styles from './page.module.scss';
 import React, { useState, useEffect, useCallback } from 'react';
-import moment from 'moment';
-import { getDailyByEmail, getWeeklyByEmail, getMonthlyByEmail, getAllRecordByEmail } from '@/services/record-service';
 import { useAuth } from '@/app/AuthContext';
+import { addDays } from 'date-fns';
+import moment from 'moment';
+import styles from './page.module.scss';
+
+import { getDailyByEmail, getWeeklyByEmail, getMonthlyByEmail, getAllRecordByEmail } from '@/services/record-service';
+import { getAllGoalByEmail } from '@/services/goal-service';
+import {getDateRange, fillMissingDates} from '@/utils/dateUtils';
+
 import Header from '@/components/Header/header';
 import Histogram from '@/components/HistoGram/histogram';
 import PieChart from '@/components/PieChart/pieChart';
 import DailyRecord from '@/models/record-daily';
-import { getAllGoalByEmail } from '@/services/goal-service';
+
 import Goal from '@/models/goal';
 
 export default function StatisticsPage() {
@@ -25,7 +30,10 @@ export default function StatisticsPage() {
   const fetchAllRecordsByEmail = useCallback(() => {
     if (user && user.email) {
       getDailyByEmail(user.email).then((items) => {
-        setDaylyRecords(items);
+        const today = new Date();
+        const dailyRange = getDateRange(addDays(today, -30), today); // Get the last 10 days
+        const filledDailyRecords = fillMissingDates(items, dailyRange);
+        setDaylyRecords(filledDailyRecords);
       });
       getWeeklyByEmail(user.email).then((items) => {
         setWeeklyRecords(items);
