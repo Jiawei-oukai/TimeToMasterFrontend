@@ -4,11 +4,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { getAllGoalByEmail } from '@/services/goal-service';
 import { getDailyByGid, getWeeklyByGid, getMonthlyByGid } from '@/services/record-service';
 import { useAuth } from '@/app/AuthContext';
-import Header from '@/components/header/header';
-import GoalCardMain from '@/components/goalCard/goalCard2';
-import Calendar from '@/components/calendar/calendar';
-import GoalDetail from '@/components/goalDetail/goalDetail';
-import CreateRecordGoalModal from '@/components/recordModal/createRecordModal';
+import Header from '@/components/Header/header';
+import GoalCardMain from '@/components/GoalCard/goalCard2';
+import Calendar from '@/components/Calendar/calendar';
+import GoalDetail from '@/components/GoalDetail/goalDetail';
+import CreateRecordGoalModal from '@/components/RecordModal/createRecordModal';
 
 import Goal from '@/models/goal';
 import Record from '@/models/record';

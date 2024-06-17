@@ -3,7 +3,7 @@ import styles from './goalDetail.module.scss';
 import Goal from '@/models/goal';
 import Record from '@/models/record';
 import Image from 'next/image';
-import HistogramSmall from '@/components/histoGram/histogramSmall';
+import HistogramSmall from '@/components/HistoGram/histogramSmall';
 import DailyRecord from '@/models/record-daily';
 import { getAllRecordByEmail } from '@/services/record-service';
 import moment from 'moment';

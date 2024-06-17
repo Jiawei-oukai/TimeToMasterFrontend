@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import styles from './createRecordModal.module.scss';
 import DurationSelector from './DurationSelector';
-import GoalCard from '../goalCard/goalCard3';
+import GoalCard from '../GoalCard/goalCard3';
 import Goal from '@/models/goal';
 import Record from '@/models/record';
 import RecordCreate from '@/models/record-create';

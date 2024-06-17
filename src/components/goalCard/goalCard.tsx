@@ -3,7 +3,7 @@ import styles from './goalCard.module.scss';
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import GoalDetailModal from '../goalModal/editGoalModal';
+import GoalDetailModal from '../GoalModal/editGoalModal';
 
 import Goal from '@/models/goal';
 

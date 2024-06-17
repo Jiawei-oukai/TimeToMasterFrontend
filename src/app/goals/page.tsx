@@ -3,11 +3,11 @@ import styles from './page.module.scss';
 import React, { useState, useEffect, useCallback } from 'react';
 import { getAllGoalByEmail, searchGoal, deleteGoal } from '@/services/goal-service'; // Ensure deleteGoal is imported
 import { useAuth } from '@/app/AuthContext';
-import Header from '@/components/header/header';
-import TypeSelector from '@/components/typeSelector/typeSelector';
-import GoalCard from '@/components/goalCard/goalCard';
-import CreateGoalModal from '@/components/goalModal/createGoalModal';
-import EditGoalModal from '@/components/goalModal/editGoalModal';
+import Header from '@/components/Header/header';
+import TypeSelector from '@/components/TypeSelector/typeSelector';
+import GoalCard from '@/components/GoalCard/goalCard';
+import CreateGoalModal from '@/components/GoalModal/createGoalModal';
+import EditGoalModal from '@/components/GoalModal/editGoalModal';
 
 import Goal from '@/models/goal';
 
