@@ -12,8 +12,8 @@ import { getAllGoalByEmail } from '@/services/goal-service';
 import Goal from '@/models/goal';
 
 export default function StatisticsPage() {
-  console.log("StatisticsPage",StatisticsPage);
   const { user } = useAuth(); // Get user information
+  const [allRecords, setAllRecords] = useState<DailyRecord[]>([]);
   const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
   const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
   const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
@@ -22,26 +22,22 @@ export default function StatisticsPage() {
   const [totalInvestedTime, setTotalInvestedTime] = useState<string>('');
   const [streak, setStreak] = useState<number>(0);
 
-  // Define fetchAllRecordsByEmail function and pass user.email
   const fetchAllRecordsByEmail = useCallback(() => {
     if (user && user.email) {
       getDailyByEmail(user.email).then((items) => {
         setDaylyRecords(items);
-        // console.log("statis Daily Records:", items);
       });
       getWeeklyByEmail(user.email).then((items) => {
         setWeeklyRecords(items);
-        // console.log("statis Weekly Records:", items);
       });
       getMonthlyByEmail(user.email).then((items) => {
         setMonthlyRecords(items);
-        // console.log("statis Monthly Records:", items);
       });
     }
   }, [user]);
 
   // Fetch all goals for the user and generate pieData
-  const fetchGraphData = useCallback(() => {
+  const fetchGraphData = () => {
     if (user && user.email) {
       getAllGoalByEmail(user.email).then((goals) => {
         const data = goals.map((goal: Goal) => ({
@@ -56,30 +52,21 @@ export default function StatisticsPage() {
         const formattedTime = `${hours}H ${minutes}min`;
         setTotalInvestedTime(formattedTime);
 
-        // console.log("Pie Data:", data);
-        // console.log("Total Invested Hours:", formattedTime);
       });
     }
-  }, [user]);
+  };
 
   // Fetch user's record streak
-  const fetchStreak = useCallback(() => {
+  const fetchStreak = () => {
     if (user && user.email) {
       getAllRecordByEmail(user.email).then((records: any[]) => {
+        setAllRecords(records);
         const today = moment().startOf('day');
         let currentStreak = 0;
   
         // Extract the date part of the records
         const dates = records.map(record => record.recordsDate.split('T')[0]);
-  
-        // Print records and dates
-        // console.log("Records:", records);
-        // console.log("Dates:", dates);
-  
         const uniqueDates = Array.from(new Set(dates)).sort((a, b) => moment(a).diff(moment(b))); // Remove duplicates and sort
-  
-        // Print uniqueDates
-        // console.log("Unique Dates:", uniqueDates);
   
         // Determine the start date for checking
         let startDate = today;
@@ -90,7 +77,6 @@ export default function StatisticsPage() {
         // Check each day for records, starting from startDate and going backward
         for (let i = 0; ; i++) {
           const dateToCheck = startDate.clone().subtract(i, 'days').format('YYYY-MM-DD');
-          console.log("Date to check:", dateToCheck);
           if (uniqueDates.includes(dateToCheck)) {
             currentStreak++;
           } else {
@@ -98,10 +84,9 @@ export default function StatisticsPage() {
           }
         }
         setStreak(currentStreak);
-        console.log("Current Streak:", currentStreak);
       });
     }
-  }, [user]);
+  };
 
   // Use useEffect to call fetchAllRecordsByEmail, fetchGraphData, and fetchStreak
   useEffect(() => {
@@ -124,7 +109,7 @@ export default function StatisticsPage() {
             <p>Streak</p>
           </div>
           <div className={styles.overallContent}>
-            <h3>{daylyRecords.length}</h3>
+            <h3>{allRecords.length}</h3>
             <p>Records</p>
           </div>
         </div>

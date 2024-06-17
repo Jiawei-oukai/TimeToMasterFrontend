@@ -55,7 +55,6 @@ export default function CreateRecordModal(props: Props) {
         Time: selectedTime/60,
         recordsDate: selectedDate.toLocaleDateString(),
       };
-      // console.log("newRecord:", newRecord);
       try {
         const createdRecord = await createRecord(newRecord);
         props.onSubmit(createdRecord);

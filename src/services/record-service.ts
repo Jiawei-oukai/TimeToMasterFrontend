@@ -42,7 +42,7 @@ export const getByDate = async (date: string, email: string): Promise<Record[]> 
     date: date,
     email: email
   };
-  // console.log("date passed from frontend:" + date);
+
   const records = await searchByDate<Record>(url, query);
   return records;
 };
@@ -74,7 +74,6 @@ export const getMonthlyByGid = async (gid : String): Promise<DailyRecord[]> => {
   return records;
 }
 
-//not in used
 export const getAllRecordByEmail = async (email: string) => {
   const records = await getAll(email);
   return records;

@@ -40,8 +40,6 @@ export const createAchievement = async (achievementDisplay: AchievementDisplay) 
 }
 
 export const updateAchievement = async (id: string, achievementDisplay: AchievementDisplay) => {
-  console.log('Updating achievement:', achievementDisplay);
-
   const response = await fetch(`http://timetomaster-backend-dev.us-east-1.elasticbeanstalk.com/achievements/${id}`, {
     method: 'PUT',
     headers: {
