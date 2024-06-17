@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import styles from './signUpForm.module.scss';
+import styles from './styles.module.scss';
 import { signUp } from '@/services/signUp-service';
 import GoalCreate from '@/models/goal-create';
 import { createGoal } from '@/services/goal-service';
+import { DEFAULT_EMAIL, DEFAULT_PASSWORD } from '@/app/login/constants';
 
 interface SignUpFormProps {
   onClose: () => void;
   setLoginEmail: (email: string) => void;
+  setLoginPassword: (password: string) => void;
 }
 
-const SignUpForm: React.FC<SignUpFormProps> = ({ onClose, setLoginEmail }) => {
+const SignUpForm: React.FC<SignUpFormProps> = ({ onClose, setLoginEmail, setLoginPassword}) => {
   const [userName, setUserName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [confirmedPassword, setConfirmedPassword] = useState<string>('');
   const [isPasswordMatch, setIsPasswordMatch] = useState<boolean>(false);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
-  const [isEmailTouched, setIsEmailTouched] = useState<boolean>(false);
+  const [isEmailTouched, setIsEmailModified] = useState<boolean>(false);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const [signUpFailed, setSignUpFailed] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    setIsPasswordMatch(password === confirmPassword);
-  }, [password, confirmPassword]);
+    setIsPasswordMatch(password === confirmedPassword);
+  }, [password, confirmedPassword]);
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,11 +37,37 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose, setLoginEmail }) => {
       userName !== '' &&
       email !== '' &&
       password !== '' &&
-      confirmPassword !== '' &&
+      confirmedPassword !== '' &&
       isPasswordMatch &&
       isEmailValid
     );
-  }, [userName, email, password, confirmPassword, isPasswordMatch, isEmailValid]);
+  }, [userName, email, password, confirmedPassword, isPasswordMatch, isEmailValid]);
+
+  const handleSubmit = async () => {
+    if (isFormValid) {
+      try {
+        const user = await signUp({ userName, email, password });
+        if (user) {
+          toast.success('Sign up successful');
+          setLoginEmail(email);
+          await createDefaultGoalsForNewUser(email);
+          onClose();
+        } else {
+          setError('Email already exists');
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        }
+      }
+    }
+  };
+
+  const handleCancel = () => {
+    setLoginEmail(DEFAULT_EMAIL);
+    setLoginPassword(DEFAULT_PASSWORD);
+    onClose();
+  }
 
   const createDefaultGoalsForNewUser = async (email: string) => {
     const today = new Date();
@@ -55,28 +83,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose, setLoginEmail }) => {
 
     for (const goal of defaultGoals) {
       await createGoal(goal);
-    }
-  };
-
-  const handleSignUp = async () => {
-    if (isFormValid) {
-      // console.log('Sign up:', { userName, email, password });
-      try {
-        const user = await signUp({ userName, email, password });
-        if (user) {
-          toast.success('Sign up successful');
-          console.log('Sign up successful');
-          setLoginEmail(email);
-          await createDefaultGoalsForNewUser(email);
-          onClose();
-        } else {
-          setSignUpFailed('Email already exists');
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          setSignUpFailed(error.message);
-        }
-      }
     }
   };
 
@@ -102,7 +108,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose, setLoginEmail }) => {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                setIsEmailTouched(true);
+                setIsEmailModified(true);
               }}
               className={styles.input}
             />
@@ -121,21 +127,21 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose, setLoginEmail }) => {
             />
           </div>
           <div className={styles.inputContainer}>
-            <label htmlFor="confirmPassword" className={styles.label}>Confirm Password:</label>
+            <label htmlFor="confirmedPassword" className={styles.label}>Confirm Password:</label>
             <input
               type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              id="confirmedPassword"
+              value={confirmedPassword}
+              onChange={(e) => setConfirmedPassword(e.target.value)}
               className={styles.input}
             />
-            {!isPasswordMatch && confirmPassword && (
+            {!isPasswordMatch && confirmedPassword && (
               <div className={styles.error}>Passwords do not match!</div>
             )}
           </div>
-          <div>{signUpFailed}</div>
-          <button onClick={handleSignUp} className={styles.button} disabled={!isFormValid}>Sign Up</button>
-          <button onClick={onClose} className={`${styles.button} ${styles.cancelButton}`}>Cancel</button>
+          <div className={styles.error}>{error}</div>
+          <button onClick={handleSubmit} className={styles.button} disabled={!isFormValid}>Sign Up</button>
+          <button onClick={handleCancel} className={`${styles.button} ${styles.cancelButton}`}>Cancel</button>
         </div>
       </div>
     </div>
