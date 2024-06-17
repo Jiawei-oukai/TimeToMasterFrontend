@@ -37,7 +37,7 @@ export default function StatisticsPage() {
   }, [user]);
 
   // Fetch all goals for the user and generate pieData
-  const fetchGraphData = () => {
+  const fetchGraphData = useCallback(() => {
     if (user && user.email) {
       getAllGoalByEmail(user.email).then((goals) => {
         const data = goals.map((goal: Goal) => ({
@@ -54,10 +54,10 @@ export default function StatisticsPage() {
 
       });
     }
-  };
+  }, [user]);
 
   // Fetch user's record streak
-  const fetchStreak = () => {
+  const fetchStreak = useCallback(() => {
     if (user && user.email) {
       getAllRecordByEmail(user.email).then((records: any[]) => {
         setAllRecords(records);
@@ -86,7 +86,7 @@ export default function StatisticsPage() {
         setStreak(currentStreak);
       });
     }
-  };
+  }, [user]);
 
   // Use useEffect to call fetchAllRecordsByEmail, fetchGraphData, and fetchStreak
   useEffect(() => {
