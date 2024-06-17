@@ -1,6 +1,6 @@
 {
   "name": "timetomaster-app",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,24 +10,15 @@
     "export": "next export"
   },
   "dependencies": {
-    "@types/node": "20.4.5",
     "@types/react": "^18.2.18",
-    "@types/react-dom": "^18.2.7",
-    "autoprefixer": "10.4.14",
     "axios": "^1.7.2",
-    "bcrypt": "^5.1.1",
-    "chroma-js": "^2.4.2",
-    "d3-scale": "^4.0.2",
-    "d3-scale-chromatic": "^3.1.0",
-    "dotenv": "^16.3.1",
     "eslint": "8.46.0",
-    "eslint-config-next": "13.4.12",
+    "eslint-config-next": "^14.2.4",
     "install": "^0.13.0",
-    "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "next": "^14.2.4",
-    "npm": "^9.8.1",
-    "postcss": "8.4.27",
+    "npm": "^10.8.1",
+    "postcss": "^8.4.38",
     "react": "18.2.0",
     "react-datepicker": "^4.25.0",
     "react-dom": "18.2.0",
@@ -38,8 +29,6 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "sass": "^1.64.2",
-    "stripe": "^12.17.0",
-    "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
   },
   "devDependencies": {
