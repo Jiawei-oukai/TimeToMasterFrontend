@@ -10,13 +10,13 @@ interface HistogramProps {
 }
 
 export default function HistogramSmall(props: HistogramProps) {
-    const [selectedPeriod, setSelectedPeriod] = useState('day');
+    const [selectedPeriod, setSelectedPeriod] = useState<string>('day');
 
     const handlePeriodChange = (newPeriod: string) => {
         setSelectedPeriod(newPeriod);
     };
 
-    const getDataForPeriod = () => {
+    const getDataForPeriod = (): DailyRecord[] => {
         let records: DailyRecord[];
         switch (selectedPeriod) {
             case 'day':
@@ -39,6 +39,20 @@ export default function HistogramSmall(props: HistogramProps) {
             return dateB - dateA;
         });
     };
+
+    const customTick = (tickProps: any): React.ReactElement => {
+        const { x, y, payload, index } = tickProps;
+        const isFirstTick = index === 0;
+        const interval = selectedPeriod === 'month' ? 1 : 2;
+        const showTick = isFirstTick || index % interval === 0; // Always show the first tick and then every interval th tick
+        return (
+            <g transform={`translate(${x},${y})`}>
+                <text x={0} y={0} dy={16} textAnchor="middle" fill="#666" fontSize={12}>
+                    {showTick ? payload.value : ''}
+                </text>
+            </g>
+        );
+    };    
 
     return (
         <div className={styles.chartContainer}>
@@ -70,8 +84,8 @@ export default function HistogramSmall(props: HistogramProps) {
                         margin={{ top: 15, right: 10, left: 10, bottom: 5 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-                        <XAxis dataKey="recordsDate" stroke="#494949" axisLine={false} tickLine={false}
-                            tick={{ fontSize: 12 }}
+                        <XAxis dataKey="recordsDate" stroke="#494949" axisLine={false} tickLine={false} interval={0}
+                            tick={customTick}
                             tickFormatter={(value) => value}
                         >
                             <ReferenceLine y={0} stroke="#494949" />

@@ -41,6 +41,20 @@ export default function Histogram(props: HistogramProps) {
         });
     };
 
+    const customTick = (tickProps: any): React.ReactElement => {
+        const { x, y, payload, index } = tickProps;
+        const isFirstTick = index === 0;
+        const interval = selectedPeriod === 'day' ? 2 : 1;
+        const showTick = isFirstTick || index % interval === 0; // Always show the first tick and then every interval th tick
+        return (
+            <g transform={`translate(${x},${y})`}>
+                <text x={0} y={0} dy={16} textAnchor="middle" fill="#666" fontSize={12}>
+                    {showTick ? payload.value : ''}
+                </text>
+            </g>
+        );
+    };    
+
     return (
         <div className={styles.chartContainer}>
             <div className={styles.chartHeader}>
@@ -71,8 +85,8 @@ export default function Histogram(props: HistogramProps) {
                         margin={{ top: 25, right: 10, left: 10, bottom: 5 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-                        <XAxis dataKey="recordsDate" stroke="#494949" axisLine={false} tickLine={false}
-                            tick={{ fontSize: 16 }}
+                        <XAxis dataKey="recordsDate" stroke="#494949" axisLine={false} tickLine={false} interval={0}
+                            tick={customTick}
                             tickFormatter={(value) => {
                                 // Return the date string directly, ensuring it is not affected by time zones.
                                 return value;

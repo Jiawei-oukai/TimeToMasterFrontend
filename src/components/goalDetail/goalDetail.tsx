@@ -9,9 +9,7 @@ import { getAllRecordByEmail } from '@/services/record-service';
 import moment from 'moment';
 
 interface Props {
-  // isOpen: boolean;
   goal: Goal | null;
-  // onClose: () => void;
   addRecord: (goal: Goal) => void;
   dailyRecords: DailyRecord[];
   weeklyRecords: DailyRecord[];

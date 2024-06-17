@@ -1,6 +1,7 @@
 "use client";
 import styles from './page.module.scss';
 import React, { useState, useEffect, useCallback } from 'react';
+import { addDays } from 'date-fns';
 import { getAllGoalByEmail } from '@/services/goal-service';
 import { getDailyByGid, getWeeklyByGid, getMonthlyByGid } from '@/services/record-service';
 import { useAuth } from '@/app/AuthContext';
@@ -13,6 +14,9 @@ import CreateRecordGoalModal from '@/components/RecordModal/createRecordModal';
 import Goal from '@/models/goal';
 import Record from '@/models/record';
 import DailyRecord from '@/models/record-daily';
+import {getDateRange, fillMissingDates} from '@/utils/dateUtils';
+
+type RecordsMap = { [key: string]: DailyRecord }
 
 export default function HomePage() {
   const [selectedTab, setSelectedTab] = useState('Today');
@@ -24,7 +28,6 @@ export default function HomePage() {
   const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
 
   const [createRecordModalOpen, setCreateRecordModalOpen] = useState(false);
-  const [goalDetailOpen, setGoalDetailOpen] = useState(true);
   const [currentGoal, setCurrentGoal] = useState<Goal>();
 
   // Fetch All goals
@@ -46,18 +49,35 @@ export default function HomePage() {
     }
   };
 
-
   const fetchAllRecordsByGid = () => {
     if (!currentGoal) return;
-  
+
+
     getDailyByGid(currentGoal._id).then((items) => {
-      setDaylyRecords(items);
+      const today = new Date();
+      const dailyRange = getDateRange(addDays(today, -10), today); // Get the last 10 days
+      const filledDailyRecords = fillMissingDates(items, dailyRange);
+      setDaylyRecords(filledDailyRecords);
     });
+
     getWeeklyByGid(currentGoal._id).then((items) => {
-      setWeeklyRecords(items);
+      const formattedItems = items.map(item => {
+        return {
+          ...item,
+          recordsDate: item.recordsDate.slice(5),// Remove year
+        };
+      });
+      setWeeklyRecords(formattedItems);
     });
+
     getMonthlyByGid(currentGoal._id).then((items) => {
-      setMonthlyRecords(items);
+      const formattedItems = items.map(item => {
+        return {
+          ...item,
+          recordsDate: item.recordsDate.slice(5),// Remove year
+        };
+      });
+      setMonthlyRecords(formattedItems);
     });
   };
   
@@ -65,7 +85,6 @@ export default function HomePage() {
   //display the detail analysis for a goal
   const handleGoalSelect = (goal: Goal) => {
     setCurrentGoal(goal);
-    // setGoalDetailOpen(true);
   };
 
   // Display modal to add record
@@ -108,9 +127,7 @@ export default function HomePage() {
           </div>
           <div className={styles.goalDetail}>
             <GoalDetail 
-              // isOpen={goalDetailOpen}
               goal={currentGoal || null}
-              // onClose={() => setGoalDetailOpen(false)}
               addRecord = {handleEditRecord}
               dailyRecords = {daylyRecords}
               weeklyRecords = {weeklyRecords}
