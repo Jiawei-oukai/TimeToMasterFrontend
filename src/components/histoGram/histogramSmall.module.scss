@@ -94,58 +94,19 @@
 
 }
 
+.customTooltip {
+  background-color: #333;
+  color: #f3f3f2;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
 
-// .buttonContainer {
-//   width: 150px;
-//   height: 25px;
+.label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
 
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-evenly;
-//   background-color: #eeeeef;
-//   border-radius: 6px;
-//   position: relative;
-//   margin-bottom: 5px;
-// }
-
-// .button {
-//   flex: 1;
-//   padding: 5px 0px;
-//   font-size: 10px;
-//   font-weight: 600;
-//   text-align: center;
-//   background-color: transparent;
-//   border: none;
-//   color: #333;
-//   cursor: pointer;
-//   // transition: background-color 0.3s;
-// }
-
-// .selected {
-//   position: relative;
-// }
-
-// .buttonHighlight {
-//   position: absolute;
-//   background-color: white;
-//   height: 85%;
-//   width: calc(33.33% - 10%);
-//   left: 5%;
-//   top: 7.5%;
-//   border-radius: 5px;
-//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-//   transition: left 0.3s;
-//   padding: 2px;
-// }
-
-// .selected .buttonHighlight {
-//   background-color: transparent;
-// }
-
-// .verticalLine {
-//   position: absolute;
-//   background-color: #bebebf;
-//   height: 60%;
-//   width: 1.5px;
-//   left: 0;
-// }
+.value {
+  font-size: 12px;
+}

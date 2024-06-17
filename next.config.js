@@ -9,7 +9,8 @@ module.exports = {
       unoptimized: true,
     },
     env: {
-      BE_BASE_URI: 'http://timetomaster-backend-dev.us-east-1.elasticbeanstalk.com',
+      // BE_BASE_URI: 'http://timetomaster-backend-dev.us-east-1.elasticbeanstalk.com',
+      BE_BASE_URI: 'http://localhost:8080',
     },
   };
   

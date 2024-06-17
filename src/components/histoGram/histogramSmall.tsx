@@ -40,6 +40,21 @@ export default function HistogramSmall(props: HistogramProps) {
         });
     };
 
+    const customTooltip = ({ active, payload, label }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className={styles.customTooltip}>
+                    <p className={styles.label}>{label}</p>
+                    <p style={{ color: payload[1].color }}>
+                            {`Total hours: ${parseFloat(payload[1].value.toFixed(2))}`}
+                    </p>
+                </div>
+            );
+        }
+
+        return null;
+    };
+
     const customTick = (tickProps: any): React.ReactElement => {
         const { x, y, payload, index } = tickProps;
         const isFirstTick = index === 0;
@@ -91,11 +106,7 @@ export default function HistogramSmall(props: HistogramProps) {
                             <ReferenceLine y={0} stroke="#494949" />
                         </XAxis>
                         <YAxis stroke="#494949" axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
-                        <Tooltip contentStyle={{ backgroundColor: '#333', color: '#f3f3f2' }}
-                            formatter={(value: number) => {
-                                return parseFloat(value.toFixed(2));
-                            }}
-                        />
+                        <Tooltip content={customTooltip}/>
                         <Bar dataKey="totalHours" fill="#d1cd8e" barSize={10}>
                             <LabelList dataKey="totalHours" position="top"
                                 formatter={(value: number) => parseFloat(value.toFixed(2))}
