@@ -1,9 +1,10 @@
 // next.config.js
 module.exports = {
-    output: 'export',
+    // output: 'export',
     reactStrictMode: true,
     pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
-    distDir: 'build',
+    // distDir: 'build',
+    distDir: '.next',
     images: {
       unoptimized: true,
     },
